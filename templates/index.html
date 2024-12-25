@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Translator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .translator-container {
+            height: 500px;
+            width: 100%;
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-section,
+        .right-section {
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .left-section {
+            padding: 20px;
+            width: 50%;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+        }
+
+        .right-section {
+            padding: 20px;
+            width: 50%;
+            background-color: #e9ecef;
+            text-align: center;
+        }
+
+        .translated-text h4 {
+            font-size: 18px;
+            color: rgb(25, 135, 84);
+        }
+
+        .translated-text h5 {
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .translated-text p {
+            font-size: 16px;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        /* Scrollbars */
+        .left-section::-webkit-scrollbar,
+        .right-section::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .left-section::-webkit-scrollbar-thumb,
+        .right-section::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="translator-container">
+            <!-- Left Section: Form -->
+            <div class="left-section">
+                <h2 class="mb-3 text-center">Language Translator</h2>
+                <form action="/" method="POST">
+                    <!-- Textbox for input text -->
+                    <div class="mb-3">
+                        <label for="input_text" class="form-label">Enter Text:</label>
+                        <textarea name="input_text" id="input_text" class="form-control" rows="8" required></textarea>
+                    </div>
+
+                    <!-- Language Select Dropdown -->
+                    <div class="mb-3">
+                        <label for="target_lang" class="form-label">Select Language:</label>
+                        <select name="target_lang" id="target_lang" class="form-select" required>
+                            <option value="en">English</option>
+                            <option value="de">German</option>
+                            <option value="fr">French</option>
+                            <option value="es">Spanish</option>
+                            <option value="it">Italian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="hi">Hindi</option>
+                            <option value="ur">Urdu</option>
+                            <!-- Add more languages as needed -->
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">Translate</button>
+                </form>
+            </div>
+
+            <!-- Right Section: Translated Text -->
+            <div class="right-section">
+                {% if detected_language %}
+                <div class="translated-text">
+                    <h4>Detected Language: {{ detected_language }}</h4>
+                    <h5>Translated Text:</h5>
+                    <p>{{ translated_text }}</p>
+                </div>
+                {% else %}
+                <div class="text-muted">
+                    <p>Translated text will appear here.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS (Optional for extra features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
